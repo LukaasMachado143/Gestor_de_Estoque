@@ -1,0 +1,8 @@
+C:\Users\Lucas\Desktop\Programation\ESTUDOS\Andre_Mentor_DEV_BACKEND\cursoAndre\Gestor_de_Estoque\Gestor_de_Estoque\bin\Debug\Gestor_de_Estoque.exe.config
+C:\Users\Lucas\Desktop\Programation\ESTUDOS\Andre_Mentor_DEV_BACKEND\cursoAndre\Gestor_de_Estoque\Gestor_de_Estoque\bin\Debug\Gestor_de_Estoque.exe
+C:\Users\Lucas\Desktop\Programation\ESTUDOS\Andre_Mentor_DEV_BACKEND\cursoAndre\Gestor_de_Estoque\Gestor_de_Estoque\bin\Debug\Gestor_de_Estoque.pdb
+C:\Users\Lucas\Desktop\Programation\ESTUDOS\Andre_Mentor_DEV_BACKEND\cursoAndre\Gestor_de_Estoque\Gestor_de_Estoque\obj\Debug\Gestor_de_Estoque.csproj.AssemblyReference.cache
+C:\Users\Lucas\Desktop\Programation\ESTUDOS\Andre_Mentor_DEV_BACKEND\cursoAndre\Gestor_de_Estoque\Gestor_de_Estoque\obj\Debug\Gestor_de_Estoque.csproj.SuggestedBindingRedirects.cache
+C:\Users\Lucas\Desktop\Programation\ESTUDOS\Andre_Mentor_DEV_BACKEND\cursoAndre\Gestor_de_Estoque\Gestor_de_Estoque\obj\Debug\Gestor_de_Estoque.csproj.CoreCompileInputs.cache
+C:\Users\Lucas\Desktop\Programation\ESTUDOS\Andre_Mentor_DEV_BACKEND\cursoAndre\Gestor_de_Estoque\Gestor_de_Estoque\obj\Debug\Gestor_de_Estoque.exe
+C:\Users\Lucas\Desktop\Programation\ESTUDOS\Andre_Mentor_DEV_BACKEND\cursoAndre\Gestor_de_Estoque\Gestor_de_Estoque\obj\Debug\Gestor_de_Estoque.pdb
