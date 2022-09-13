@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Gestor_de_Estoque
 {
+
     interface IEstoque
     {
         void Exibir();

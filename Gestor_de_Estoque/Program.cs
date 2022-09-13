@@ -3,17 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Gestor_de_Estoque
 {
+    [System.Serializable]
     internal class Program
     {
-
+        
         static List<IEstoque> produtosExistentes = new List<IEstoque>();
         enum Menu { Listar = 1, Adicionar, Remover, Entrada, Saida, Sair }
         static void Main(string[] args)
         {
             bool fecharPrograma = false;
+
+            CarregarDados();
+
             Console.WriteLine("Gestor de Estoque CMD com C#\n");
             while (fecharPrograma == false)
             {
@@ -33,15 +39,19 @@ namespace Gestor_de_Estoque
                     switch (tipoOpcao)
                     {
                         case Menu.Listar:
+                            ListarDados();
                             break;
                         case Menu.Adicionar:
                             RealizarCadastro();
                             break;
                         case Menu.Remover:
+                            RemoverDados();
                             break;
                         case Menu.Entrada:
+                            ControleEstoque("ADICIONAR");
                             break;
                         case Menu.Saida:
+                            ControleEstoque("RETIRAR");
                             break;
                         case Menu.Sair:
                             Console.WriteLine("Programa encerrado com sucesso.\nPressione ENTER para fechar a tela.");
@@ -58,6 +68,43 @@ namespace Gestor_de_Estoque
                     fecharPrograma = true;
                 }
             }
+        }
+
+        static void CarregarDados()
+        {
+            FileStream stream = new FileStream("produtos.dat", FileMode.OpenOrCreate);
+            BinaryFormatter encoder = new BinaryFormatter();
+
+            try
+            {
+                produtosExistentes = (List<IEstoque>)encoder.Deserialize(stream);
+                if (produtosExistentes == null)
+                {
+                    produtosExistentes = new List<IEstoque>();
+                }
+            }
+            catch(Exception e)
+            {
+                produtosExistentes = new List<IEstoque>();
+            }
+
+            stream.Close();
+        }
+
+        static void ListarDados()
+        {
+            int i=0;
+            Console.WriteLine("* Lista de Itens *\n");
+            foreach (IEstoque produto in produtosExistentes)
+            {
+                Console.WriteLine("==========================================");
+                Console.WriteLine($"-> ID: {i}");
+                produto.Exibir();
+                i++;
+            }
+            Console.WriteLine("==========================================\n");
+            Console.ReadLine();
+            //Console.Clear();
         }
 
         static void RealizarCadastro()
@@ -97,8 +144,11 @@ namespace Gestor_de_Estoque
 
             ProdutoFisico pf = new ProdutoFisico(nome, preco, frete);
             produtosExistentes.Add(pf);
+            SalvarDados();
 
             Console.WriteLine("Cadastro Realizado com sucesso");
+            Console.ReadLine();
+            Console.Clear();
         }
 
         static void CadastroEBook()
@@ -113,8 +163,11 @@ namespace Gestor_de_Estoque
 
             Ebook eb = new Ebook(nome, preco, autor);
             produtosExistentes.Add(eb);
+            SalvarDados();
 
             Console.WriteLine("Cadastro Realizado com sucesso");
+            Console.ReadLine();
+            Console.Clear();
         }
 
         static void CadastroCurso()
@@ -129,8 +182,56 @@ namespace Gestor_de_Estoque
 
             Curso cs = new Curso(nome, preco, autor);
             produtosExistentes.Add(cs);
+            SalvarDados();
 
             Console.WriteLine("Cadastro Realizado com sucesso");
+            Console.ReadLine();
+            Console.Clear();
+        }
+        static void RemoverDados()
+        {
+            ListarDados();
+            Console.WriteLine("-> Informe o ID para remover o Produto: ");
+            int id = int.Parse(Console.ReadLine());
+
+            if (id >= 0 || id < produtosExistentes.Count)
+            {
+                produtosExistentes.RemoveAt(id);
+                SalvarDados();
+                Console.WriteLine("Remoção realizada com sucesso.");
+                Console.ReadLine();
+            }
+        }
+        static void ControleEstoque(string auxAcao)
+        {
+            ListarDados();
+            Console.WriteLine("-> Informe o ID do Produto a ser manipulado: ");
+            int id = int.Parse(Console.ReadLine());
+
+            if (id >= 0 || id < produtosExistentes.Count)
+            {
+                if (auxAcao == "ADICIONAR")
+                {
+                    produtosExistentes[id].AdicionarEntrada();
+                    SalvarDados();
+                }
+                else if (auxAcao == "RETIRAR")
+                {
+                    produtosExistentes[id].AdicionarSaida();
+                    SalvarDados();
+                }
+                Console.ReadLine();
+                Console.Clear();
+            }
+        }
+        static void SalvarDados()
+        {
+            FileStream stream = new FileStream("produtos.dat", FileMode.OpenOrCreate);
+            BinaryFormatter encoder = new BinaryFormatter();
+
+            encoder.Serialize(stream, produtosExistentes);
+
+            stream.Close();
         }
     }
 }

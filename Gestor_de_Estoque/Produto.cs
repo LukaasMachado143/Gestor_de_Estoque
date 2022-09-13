@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Gestor_de_Estoque
 {
+    [System.Serializable]
     abstract class Produto
     {
         public string nome;
